@@ -58,7 +58,7 @@ COPY --from=build /app/target/*.jar /app/CrudApiApplication.jar
 EXPOSE 8080
 # Expose the port on which the application will run in the container.
 
-ENTRYPOINT ["java", "-jar", "/app/target/CrudApiApplication.jar"]
+ENTRYPOINT ["java", "-jar", "/app/CrudApiApplication.jar"]
 # Defines the default command that runs automatically when the Docker container starts up, launching the Java application.
 # - ENTRYPOINT: Sets the executable that will always run when the container is containerized. It makes your container behave like a standalone executable program.
 # - ["java", "-jar", "CrudApiApplication.jar"]: This uses the exec form (parsed as a JSON array) to run the exact command: java -jar CrudApiApplication.jar.
