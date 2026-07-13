@@ -48,7 +48,7 @@ WORKDIR /app
 # Sets the working directory inside this new, second stage container to /app
 # - All subsequent commands in this stage will execute from inside this folder.
 
-COPY --from=build "/app/demo1/demo/target" /app/target/
+COPY --from=build /app/target/*.jar /app/CrudApiApplication.jar
 # Extracts only the final compiled Java file from your first build stage and drops it into your clean, lightweight runtime stage, renaming it for simplicity.
 # - COPY: Copies files into the current image layer.
 # - --from=build: Intercepts the normal behavior (which copies from the host machine) and tells Docker to look inside the filesystem of the previous stage named build.
