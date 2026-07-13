@@ -14,7 +14,7 @@ WORKDIR /app
 # - If the /app directory does not exist yet, Docker automatically creates it.
 # - Every following command in the Dockerfile (like COPY, RUN, CMD, or ENTRYPOINT) will execute from inside this folder.
 
-COPY "demo\ \(1\)/demo/" /app/
+COPY "demo1/demo/" /app/
 # Copy everything from the current directory (host computer) into the Docker container.
 # - First dot (.): Represents the source path on the host machine (usually the project's root folder where the Dockerfile lives).
 # - Second dot (.): Represents the destination path inside the container. Because of the previous WORKDIR /app command, this resolves directly to /app
@@ -48,7 +48,7 @@ WORKDIR /app
 # Sets the working directory inside this new, second stage container to /app
 # - All subsequent commands in this stage will execute from inside this folder.
 
-COPY --from=build "/app/demo\ \(1\)/demo/target" /app/target/
+COPY --from=build "/app/demo1/demo/target" /app/target/
 # Extracts only the final compiled Java file from your first build stage and drops it into your clean, lightweight runtime stage, renaming it for simplicity.
 # - COPY: Copies files into the current image layer.
 # - --from=build: Intercepts the normal behavior (which copies from the host machine) and tells Docker to look inside the filesystem of the previous stage named build.
