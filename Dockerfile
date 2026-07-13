@@ -14,7 +14,7 @@ WORKDIR /app
 # - If the /app directory does not exist yet, Docker automatically creates it.
 # - Every following command in the Dockerfile (like COPY, RUN, CMD, or ENTRYPOINT) will execute from inside this folder.
 
-COPY . .
+COPY "demo (1)/demo/" /app/
 # Copy everything from the current directory (host computer) into the Docker container.
 # - First dot (.): Represents the source path on the host machine (usually the project's root folder where the Dockerfile lives).
 # - Second dot (.): Represents the destination path inside the container. Because of the previous WORKDIR /app command, this resolves directly to /app
@@ -48,7 +48,7 @@ WORKDIR /app
 # Sets the working directory inside this new, second stage container to /app
 # - All subsequent commands in this stage will execute from inside this folder.
 
-COPY --from=build /app/target/*.jar CrudApiApplication.jar
+COPY --from=build "/app/demo (1)/demo/target" /app/target/
 # Extracts only the final compiled Java file from your first build stage and drops it into your clean, lightweight runtime stage, renaming it for simplicity.
 # - COPY: Copies files into the current image layer.
 # - --from=build: Intercepts the normal behavior (which copies from the host machine) and tells Docker to look inside the filesystem of the previous stage named build.
@@ -58,10 +58,11 @@ COPY --from=build /app/target/*.jar CrudApiApplication.jar
 EXPOSE 8080
 # Expose the port on which the application will run in the container.
 
-ENTRYPOINT ["java", "-jar", "CrudApiApplication.jar"]
+ENTRYPOINT ["java", "-jar", "/app/target/CrudApiApplication.jar"]
 # Defines the default command that runs automatically when the Docker container starts up, launching the Java application.
 # - ENTRYPOINT: Sets the executable that will always run when the container is containerized. It makes your container behave like a standalone executable program.
 # - ["java", "-jar", "CrudApiApplication.jar"]: This uses the exec form (parsed as a JSON array) to run the exact command: java -jar CrudApiApplication.jar.
 # - java: Calls the Java runtime launcher.
 # - -jar: Tells Java to execute a packaged JAR file.
 # - CrudApiApplication.jar: Points to the target file that was copied in the previous step.
+
